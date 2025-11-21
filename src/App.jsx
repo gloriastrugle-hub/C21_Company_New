@@ -38,10 +38,22 @@ function App() {
       <header>
         <nav>
           <img src={logo} alt="C21 Logo" />
+
           <div className="header-title">
             C21 Apartment, Coffee, and Spa
           </div>
-          <ul>
+
+          {/* HAMBURGER BUTTON (mobile) */}
+          <div className="hamburger" onClick={() => {
+            document.querySelector(".mobile-menu").classList.toggle("open");
+          }}>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+
+          {/* DESKTOP MENU */}
+          <ul className="desktop-menu">
             <li><a href="#welcome">Welcome</a></li>
             <li><a href="#about">Home</a></li>
             <li><a href="#coffee">C21 Coffee</a></li>
@@ -50,6 +62,16 @@ function App() {
             <li><a href="#contact">Contact</a></li>
           </ul>
         </nav>
+
+        {/* SLIDE DRAWER MENU */}
+        <div className="mobile-menu">
+          <a href="#welcome">Welcome</a>
+          <a href="#about">Home</a>
+          <a href="#coffee">C21 Coffee</a>
+          <a href="#spa">C21 Spa</a>
+          <a href="#apartment">Apartment</a>
+          <a href="#contact">Contact</a>
+        </div>
       </header>
 
       {/* WELCOME SECTION */}
