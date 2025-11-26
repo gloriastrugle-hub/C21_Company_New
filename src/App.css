@@ -1,0 +1,552 @@
+/* === GLOBAL RESET === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+  font-family: 'Poppins', sans-serif;
+  scroll-behavior: smooth;
+  color: #333;
+  background-color: #fff;
+}
+
+/* ================= HEADER ================= */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 30px;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  justify-content: flex-start;
+  gap: 15px;
+  position: relative;
+}
+
+header img {
+  height: 50px;
+  border-radius: 10px;
+}
+
+/* Header title di samping logo, ukuran 2x lipat tapi responsive */
+.header-title {
+  font-size: clamp(2.4rem, 4vw, 2.8rem);
+  font-weight: 600;
+  color: #3e2723;
+  margin-left: 10px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+nav ul {
+  display: flex;
+  gap: 25px;
+  list-style: none;
+  margin-left: auto;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+nav ul li a:hover {
+  color: #c49a6c;
+}
+
+/* ================= HEADER DROPDOWN ================= */
+.desktop-menu li.dropdown {
+  position: relative;
+}
+
+.desktop-menu li.dropdown ul {
+  display: block;
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  min-width: 180px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  z-index: 1000;
+  padding: 10px 0;
+  list-style: none;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+}
+
+.desktop-menu li.dropdown:hover ul {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.desktop-menu li.dropdown ul li {
+  padding: 10px 20px;
+}
+
+.desktop-menu li.dropdown ul li a {
+  color: #333;
+  font-weight: 500;
+}
+
+.desktop-menu li.dropdown ul li a:hover {
+  color: #c49a6c;
+}
+
+/* ================= HAMBURGER ICON ================= */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  margin-left: auto;
+  gap: 5px;
+}
+
+.hamburger div {
+  width: 25px;
+  height: 3px;
+  background: #333;
+  transition: all 0.3s ease;
+}
+
+.hamburger.active div:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active div:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active div:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* ================= HERO ================= */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.hero img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero .content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: white;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.4);
+  padding: 30px;
+  border-radius: 10px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+
+.hero p {
+  font-size: 1.1rem;
+  color: #fff; /* Warna font sudah putih */
+}
+
+/* ================= SECTIONS COMMON ================= */
+section {
+  padding: 80px 10%;
+  text-align: center;
+}
+
+section h2 {
+  font-size: 2.2rem;
+  margin-bottom: 25px;
+  color: #3e2723;
+}
+
+section p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 25px;
+  color: #444;
+}
+
+/* ================= SLIDER ================= */
+.slider {
+  margin: 30px 0;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.slider img {
+  width: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+/* ================= RESERVATION ================= */
+.reservation {
+  background: #fafafa;
+  padding: 80px 10%;
+}
+
+.reservation-container {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.reservation-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  width: 320px;
+  text-align: center;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+}
+
+.reservation-card h3 {
+  font-size: 1.3rem;
+  color: #4a2c2a;
+  margin-bottom: 10px;
+}
+
+.reservation-card p {
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.btn-reserve {
+  padding: 10px 20px;
+  background: #c49a6c;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.btn-reserve:hover {
+  background: #b08555;
+}
+
+/* ================= POPUP RESERVATION ================= */
+#reservationPopup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  padding: 15px;
+}
+
+#reservationPopup.show {
+  display: flex;
+}
+
+.popup-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  width: 350px;
+  max-width: 100%;
+  position: relative;
+}
+
+.popup-content .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.popup-content h2 {
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+  color: #4a2c2a;
+  text-align: center;
+}
+
+.popup-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.popup-content input,
+.popup-content select,
+.popup-content textarea {
+  padding: 10px;
+  font-size: 0.95rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.popup-content textarea {
+  resize: vertical;
+}
+
+.popup-content .submit-btn {
+  padding: 10px;
+  background: #c49a6c;
+  color: #fff;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.popup-content .submit-btn:hover {
+  background: #b08555;
+}
+
+/* ================= FOOTER ================= */
+footer {
+  background: #f5f5f5;
+  text-align: center;
+  padding: 40px 20px;
+  font-size: 1rem;
+  color: #333;
+}
+
+footer h3 {
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+  color: #5d4037;
+}
+
+footer .footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 15px; /* <-- jarak ke atas */
+}
+
+footer .footer-links a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 700; /* <-- bold */
+  transition: color 0.3s ease;
+}
+
+footer .footer-links a:hover {
+  color: #c49a6c;
+}
+
+/* ================= OPENING HOURS BELOW CONTACT ================= */
+.opening-hours {
+  margin-top: 20px;
+}
+
+.opening-hours p:first-child {
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+}
+
+.opening-hours p:last-child {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  header {
+    padding: 10px 15px;
+  }
+
+  nav ul {
+    left: -100%;
+    top: 70px;
+    width: 100%;
+    flex-direction: column;
+    background: #fff;
+    padding: 20px 0;
+    transition: left 0.3s ease;
+  }
+
+  nav ul.show {
+    left: 0;
+  }
+
+  .desktop-menu li.dropdown ul {
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    box-shadow: none;
+    border: none;
+    padding: 0;
+  }
+
+  .desktop-menu li.dropdown ul li {
+    padding: 10px 0;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  /* ================= MOBILE RESERVATION & POPUP ================= */
+  .reservation-container {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .reservation-card {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .reservation-card h3 {
+    font-size: 1.2rem;
+  }
+
+  .reservation-card p {
+    font-size: 0.9rem;
+  }
+
+  .btn-reserve {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+  }
+
+  #reservationPopup .popup-content {
+    width: 90%;
+    max-width: 400px;
+    padding: 15px;
+  }
+
+  #reservationPopup .popup-content h2 {
+    font-size: 1.2rem;
+  }
+
+  #reservationPopup .popup-content input,
+  #reservationPopup .popup-content select,
+  #reservationPopup .popup-content textarea,
+  #reservationPopup .popup-content .submit-btn {
+    font-size: 0.95rem;
+    padding: 10px;
+  }
+
+  /* ================= MOBILE OPENING HOURS SPACING ================= */
+  .opening-hours {
+    margin-top: 25px;
+  }
+
+  .opening-hours p {
+    line-height: 1.6;
+    margin-bottom: 5px;
+  }
+
+  .opening-hours p:first-child {
+    font-size: 1.15rem;
+    font-weight: 600;
+  }
+
+  .opening-hours p:last-child {
+    font-size: 1rem;
+  }
+}
+/* ================= ADDED: small styles for added spa fields/buttons ================= */
+
+.label-spa {
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 8px;
+  margin-bottom: 6px;
+  display: block;
+  color: #4a2c2a;
+}
+
+.add-menu-btn {
+  width: 100%;
+  background: #faf7f3;
+  border: 1px dashed #c49a6c;
+  padding: 10px;
+  border-radius: 8px;
+  margin: 6px 0 10px 0;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.08s ease;
+  font-size: 14px;
+  color: #4a2c2a;
+}
+
+.add-menu-btn:hover {
+  background: #fff6ee;
+  transform: translateY(-1px);
+}
+
+/* small spacing tweak for inputs inside popup to keep consistent vertical rhythm */
+.popup-content input[name="duration1"],
+.popup-content input[name="duration2"] {
+  margin-top: 2px;
+}
+
+/* keep select & inputs full width on smaller screens (already applied globally,
+   but explicit here to be safe for the new fields) */
+.popup-content select,
+.popup-content input,
+.popup-content textarea {
+  width: 100%;
+}
+
+/* responsive: make sure button stays readable on very small devices */
+@media (max-width: 420px) {
+  .add-menu-btn {
+    padding: 9px;
+    font-size: 13px;
+  }
+}
+/* === FIX: Popup Form Biar Bisa Scroll === */
+.popup-content {
+  max-height: 85vh;   /* popup tidak melebihi layar */
+  overflow-y: auto;   /* aktifkan scroll */
+  padding-right: 10px; /* biar isi ga ketutup scrollbar */
+}
