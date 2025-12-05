@@ -46,12 +46,15 @@ header img {
 
 /* Header title di samping logo, ukuran 2x lipat tapi responsive */
 .header-title {
-  font-size: clamp(2.4rem, 4vw, 2.8rem);
+  font-size: clamp(2.0rem, 3.6vw, 2.6rem);
   font-weight: 600;
   color: #3e2723;
   margin-left: 10px;
   white-space: nowrap;
   flex-shrink: 0;
+  max-width: calc(100% - 200px); /* prevent overflow */
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 nav ul {
@@ -144,6 +147,60 @@ nav ul li a:hover {
   transform: rotate(-45deg) translate(6px, -6px);
 }
 
+/* ================= MOBILE SIDEBAR (SLIDE-IN) ================= */
+.mobile-overlay {
+  display: none;
+}
+
+.mobile-sidebar {
+  position: fixed;
+  top: 0;
+  right: -280px;
+  left: auto;
+  height: 100%;
+  width: 280px;
+  background: #fff;
+  box-shadow: -2px 0 12px rgba(0,0,0,0.12);
+  transition: right 0.28s ease;
+  z-index: 1500;
+  overflow-y: auto;
+}
+
+.mobile-sidebar.open {
+  right: 0;
+}
+
+.mobile-sidebar-inner {
+  padding: 20px;
+  padding-top: 85px; /* space for header */
+}
+
+.mobile-sidebar .mobile-close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 2rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #333;
+}
+
+.mobile-sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 6px 4px;
+}
+
+.mobile-sidebar ul li a {
+  text-decoration: none;
+  color: #3e2723;
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
 /* ================= HERO ================= */
 .hero {
   position: relative;
@@ -176,12 +233,12 @@ nav ul li a:hover {
 }
 
 .hero h1 {
-  font-size: 2.5rem;
-  margin-bottom: 15px;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  margin-bottom: 12px;
 }
 
 .hero p {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   color: #fff; /* Warna font sudah putih */
 }
 
@@ -292,6 +349,9 @@ section p {
   width: 350px;
   max-width: 100%;
   position: relative;
+  max-height: 85vh;   /* popup tidak melebihi layar */
+  overflow-y: auto;   /* aktifkan scroll */
+  padding-right: 10px; /* biar isi ga ketutup scrollbar */
 }
 
 .popup-content .close-btn {
@@ -394,44 +454,73 @@ footer .footer-links a:hover {
 }
 
 /* ================= RESPONSIVE ================= */
+@media (max-width: 992px) {
+  .header-title {
+    max-width: calc(100% - 140px);
+  }
+}
+
 @media (max-width: 768px) {
   header {
     padding: 10px 15px;
   }
 
-  nav ul {
-    left: -100%;
-    top: 70px;
-    width: 100%;
-    flex-direction: column;
-    background: #fff;
-    padding: 20px 0;
-    transition: left 0.3s ease;
-  }
-
-  nav ul.show {
-    left: 0;
-  }
-
-  .desktop-menu li.dropdown ul {
-    position: static;
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-    box-shadow: none;
-    border: none;
-    padding: 0;
-  }
-
-  .desktop-menu li.dropdown ul li {
-    padding: 10px 0;
+  /* hide desktop menu, show hamburger */
+  .desktop-menu {
+    display: none;
   }
 
   .hamburger {
     display: flex;
   }
 
-  /* ================= MOBILE RESERVATION & POPUP ================= */
+  /* overlay for when sidebar open */
+  .mobile-overlay {
+    display: none;
+  }
+  .mobile-overlay.show {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.38);
+    z-index: 1400;
+  }
+
+  /* HERO adjustments for mobile */
+  .hero {
+    height: auto;
+    min-height: 62vh;
+    padding: 70px 0 40px; /* keep space for fixed header */
+    display: flex;
+    align-items: center;
+  }
+
+  .hero img {
+    height: 100%;
+    min-height: 62vh;
+  }
+
+  .hero .content {
+    position: relative;
+    top: 0;
+    transform: none;
+    background: rgba(0,0,0,0.45);
+    padding: 18px;
+    border-radius: 8px;
+    margin: 0 16px;
+    max-width: 92%;
+  }
+
+  .hero h1 {
+    font-size: 1.45rem;
+    margin-bottom: 10px;
+  }
+
+  .hero p {
+    font-size: 0.95rem;
+  }
+
+  /* Reservation layout */
   .reservation-container {
     flex-direction: column;
     gap: 20px;
@@ -475,7 +564,7 @@ footer .footer-links a:hover {
     padding: 10px;
   }
 
-  /* ================= MOBILE OPENING HOURS SPACING ================= */
+  /* MOBILE OPENING HOURS SPACING */
   .opening-hours {
     margin-top: 25px;
   }
@@ -494,6 +583,7 @@ footer .footer-links a:hover {
     font-size: 1rem;
   }
 }
+
 /* ================= ADDED: small styles for added spa fields/buttons ================= */
 
 .label-spa {
@@ -544,9 +634,78 @@ footer .footer-links a:hover {
     font-size: 13px;
   }
 }
-/* === FIX: Popup Form Biar Bisa Scroll === */
-.popup-content {
-  max-height: 85vh;   /* popup tidak melebihi layar */
-  overflow-y: auto;   /* aktifkan scroll */
-  padding-right: 10px; /* biar isi ga ketutup scrollbar */
+/* === FIX: HEADER TITLE RESPONSIVE === */
+@media (max-width: 768px) {
+  .header-title {
+    font-size: 1.3rem;      /* lebih kecil */
+    max-width: 150px;       /* supaya header tidak memakan ruang menu */
+    white-space: normal;    /* biar bisa turun jadi 2 baris */
+    line-height: 1.2;
+  }
+}
+/* === FIX: HAMBURGER SIDEBAR WIDTH === */
+@media (max-width: 768px) {
+  nav ul {
+    width: 70%;       /* tadinya 100% makanya nutup setengah layar */
+    max-width: 260px; /* biar elegan kayak drawer */
+    right: -100%;      /* posisi awal tetap hidden */
+  }
+
+  nav ul.show {
+    right: 0;          /* masuk smooth dari kanan */
+  }
+}
+/* === FIX: MOBILE SIDEBAR WIDTH LEBIH KECIL === */
+@media (max-width: 768px) {
+  .mobile-sidebar {
+    width: 40%;          /* dari default 280px jadi 60% layar */
+    max-width: 200px;    /* batas maksimal biar rapih */
+    right: -40%;          /* mengikuti width baru */
+  }
+
+  .mobile-sidebar.open {
+    right: 0;
+  }
+
+  /* Overlay tetap full, biar sisi kanan gelap & bisa di klik tutup */
+  .mobile-overlay.show {
+    background: rgba(0,0,0,0.45);
+  }
+}
+/* --- MOBILE SIDEBAR MENU SPACING & DIVIDER --- */
+
+.mobile-sidebar-inner {
+  padding: 20px 20px;
+}
+
+.mobile-close {
+  font-size: 32px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* memberi jarak antara tombol X dan menu */
+.mobile-sidebar-inner ul {
+  margin-top: 25px !important;
+  padding: 0;
+  list-style: none;
+}
+
+/* styling tiap item */
+.mobile-sidebar-inner ul li {
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.35); /* warna garis */
+}
+
+.mobile-sidebar-inner ul li:hover {
+  border-bottom-color: rgba(212, 175, 55, 0.6);
+}
+
+/* styling link */
+.mobile-sidebar-inner ul li a {
+  text-decoration: none;
+  font-size: 1rem;
+  display: block;
 }

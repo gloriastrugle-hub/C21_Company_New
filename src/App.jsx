@@ -57,6 +57,8 @@ function App() {
   };
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
+  const closeMenu = () => setMenuOpen(false);
+
   const submitReservation = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -102,27 +104,52 @@ function App() {
           <img src={logo} alt="C21 Logo" />
           <div className="header-title">C21 Coffee, Spa, & Apartment</div>
 
-          <div className={`hamburger ${menuOpen ? "active" : ""}`} onClick={toggleMenu}>
+          {/* HAMBURGER */}
+          <div
+            className={`hamburger ${menuOpen ? "active" : ""}`}
+            onClick={toggleMenu}
+            aria-label="Toggle menu"
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => { if (e.key === "Enter") toggleMenu(); }}
+          >
             <div></div>
             <div></div>
             <div></div>
           </div>
 
-          <ul className={`desktop-menu ${menuOpen ? "show" : ""}`}>
-            <li><a href="#about" onClick={() => setMenuOpen(false)}>Home</a></li>
+          {/* Desktop menu (visible on wider screens) */}
+          <ul className="desktop-menu">
+            <li><a href="#about">Home</a></li>
             <li className="dropdown">
-              <a href="#coffee" onClick={() => setMenuOpen(false)}>C21</a>
+              <a href="#coffee">C21</a>
               <ul>
-                <li><a href="#coffee" onClick={() => setMenuOpen(false)}>C21 Coffee</a></li>
-                <li><a href="#spa" onClick={() => setMenuOpen(false)}>C21 Spa</a></li>
-                <li><a href="#apartment" onClick={() => setMenuOpen(false)}>C21 Apartment</a></li>
+                <li><a href="#coffee">C21 Coffee</a></li>
+                <li><a href="#spa">C21 Spa</a></li>
+                <li><a href="#apartment">C21 Apartment</a></li>
               </ul>
             </li>
-            <li><a href="#reservation" onClick={() => setMenuOpen(false)}>Reservation</a></li>
-            <li><a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a></li>
+            <li><a href="#reservation">Reservation</a></li>
+            <li><a href="#contact">Contact</a></li>
           </ul>
         </nav>
       </header>
+
+      {/* MOBILE SLIDE-IN SIDEBAR */}
+      <div className={`mobile-overlay ${menuOpen ? "show" : ""}`} onClick={closeMenu} />
+      <aside className={`mobile-sidebar ${menuOpen ? "open" : ""}`} aria-hidden={!menuOpen}>
+        <div className="mobile-sidebar-inner">
+          <button className="mobile-close" onClick={closeMenu} aria-label="Close menu">×</button>
+          <ul>
+            <li><a href="#about" onClick={closeMenu}>Home</a></li>
+            <li><a href="#coffee" onClick={closeMenu}>C21 Coffee</a></li>
+            <li><a href="#spa" onClick={closeMenu}>C21 Spa</a></li>
+            <li><a href="#apartment" onClick={closeMenu}>C21 Apartment</a></li>
+            <li><a href="#reservation" onClick={closeMenu}>Reservation</a></li>
+            <li><a href="#contact" onClick={closeMenu}>Contact</a></li>
+          </ul>
+        </div>
+      </aside>
 
       {/* HERO */}
       <section id="welcome" className="hero">
